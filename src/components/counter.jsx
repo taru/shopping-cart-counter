@@ -7,16 +7,9 @@ class Counter extends Component {
   };
   // state is a special property in react components. object that includes any data that this component needs.
 
-  constructor() {
-    super();
-    this.handleIncrement = this.handleIncrement.bind(this);
-    // functions are objects, so in the handleincre(), if we use 'this', itll
-    // refer to the function object and not the counter component. the constructor
-    // makes a new instance of handleincrement, which we add to the actual one
-  }
-
-  handleIncrement = () => {
-    console.log("increment clicked", this);
+  handleIncrement = product => {
+    console.log(product);
+    this.setState({ count: this.state.count + 1 });
   };
 
   renderTags() {
@@ -38,7 +31,7 @@ class Counter extends Component {
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         {/* m-2 is margin 2 spaces */}
         <button
-          onClick={this.handleIncrement}
+          onClick={() => this.handleIncrement({ id: 1 })}
           className="btn btn-secondary btn-sm"
         >
           Increment
