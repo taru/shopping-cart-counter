@@ -5,15 +5,14 @@ class Counter extends Component {
     count: 0,
     tags: ["tag1", "tag2", "tag3"]
   };
-  // state is a special property in react components. object that includes any data that this component needs.
 
   handleIncrement = product => {
-    console.log(product);
     this.setState({ count: this.state.count + 1 });
+    console.log(product);
   };
 
   renderTags() {
-    if (this.state.tags.length === 0) return <p>There are no tags!</p>;
+    if (this.state.tags.length === 0) return <p>Please add some tags!</p>;
 
     return (
       <ul>
@@ -24,38 +23,31 @@ class Counter extends Component {
     );
   }
 
+  // *******************************************************************************
   render() {
     return (
       <React.Fragment>
-        {/* react frag is so we don't have 1 extra <div> within our root <div> */}
-        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        {/* m-2 is margin 2 spaces */}
+        <span className={this.getBadgeClasses()}>{this.state.count}</span>
+
         <button
-          onClick={() => this.handleIncrement({ id: 1 })}
           className="btn btn-secondary btn-sm"
+          onClick={() => this.handleIncrement(this.state.count)}
+          // passing count as the argument but in reality we will
+          // use the product ID of the shopping cart item
         >
           Increment
         </button>
-        <div>
-          {this.state.tags.length === 0 && "Please create a new tag"}
-          {/* truesy operand,JS engine will return last operand every time when comparing multiple truesy operands */}
-          {this.renderTags()}
-        </div>
+
+        <div>{this.renderTags()}</div>
       </React.Fragment>
     );
-    // return gives React.createElement(parentElement, "content").
-    // this is why we import react at the top
   }
+  // *******************************************************************************
 
-  getBadgeClasses() {
+  getBadgeClasses(count) {
     let classes = "badge m-2 badge-";
     classes += this.state.count === 0 ? "warning" : "primary";
     return classes;
-  }
-
-  formatCount() {
-    const { count } = this.state;
-    return count === 0 ? "Zero" : count;
   }
 }
 
