@@ -5,7 +5,7 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 // this is standard way to import bootstrap
-import Counter from "./components/counterRepeat";
+import Counter from "./components/Counter";
 // bc counter is default export, dont need curly brackets
 
 ReactDOM.render(<Counter />, document.getElementById("root"));
